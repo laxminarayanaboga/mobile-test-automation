@@ -34,64 +34,88 @@ mobile-test-automation/
 └── README.md            # This file
 ```
 
-## Quick Start Guide
+# Mobile Test Automation Framework
 
-### Prerequisites
-1. **Java 21**: Download from [Eclipse Adoptium](https://adoptium.net/)
-2. **Maven 3.9+**: Download from [Apache Maven](https://maven.apache.org/download.cgi)
-3. **Node.js 22+**: Download from [Node.js](https://nodejs.org/) (required for Appium)
-4. **Android Studio**: Download from [Android Developers](https://developer.android.com/studio) (for emulator)
+A simple Android app testing framework using Java + Appium.
 
-### 🚀 Easy Setup with Batch Scripts
+## 📋 What You Need (Install Once)
 
-#### 1. Run Setup (First Time Only)
-```bash
-setup.bat
-```
-This will:
-- Verify Java, Maven, Node.js installation
-- Install Appium and UiAutomator2 driver
-- Set up Android SDK path
-- Create Android emulator
+1. **Java 21** - [Download here](https://adoptium.net/)
+2. **Maven** - [Download here](https://maven.apache.org/download.cgi)
+3. **Node.js** - [Download here](https://nodejs.org/)
+4. **Android Studio** - [Download here](https://developer.android.com/studio)
 
-#### 2. Start Services
-```bash
-# Terminal 1: Start Appium Server
-start-appium.bat
+## � One-Time Setup
 
-# Terminal 2: Start Android Emulator (if needed)
-device-manager.bat
-# Select option 1 to start emulator
-```
-
-#### 3. Run Tests
-```bash
-# Run all tests
-run-tests.bat
-
-# Or run specific tests with Maven
-mvn test -Dtest=ContactsExplorationTest
-mvn test -Dtest=DeviceConnectivityTest
-```
-
-### Manual Setup (Alternative)
-
-#### Environment Variables
-```bash
-JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-21.x.x-hotspot
-ANDROID_HOME=C:\Users\{username}\AppData\Local\Android\Sdk
-```
-
-#### Installation Commands
-```bash
-# Install Appium
-npm install -g appium@2.19.0
+**Step 1: Install Appium**
+```cmd
+npm install -g appium
 appium driver install uiautomator2
-
-# Verify installation
-appium driver list --installed
-appium -v
 ```
+
+**Step 2: Add npm to Windows PATH**
+- Press `Windows + R`, type `sysdm.cpl`, Enter
+- Click "Environment Variables" 
+- Under "User variables", find "Path", click "Edit"
+- Click "New", add: `C:\Users\YourUsername\AppData\Roaming\npm`
+- Click OK, restart Command Prompt
+
+**Step 3: Install project dependencies**
+```cmd
+cd "C:\Users\LaxminarayanaBoga\mygit\personal\mobile-test-automation"
+mvn clean install -DskipTests
+```
+
+## 🚀 Daily Usage (After PC Restart)
+
+**Every time you want to run tests:**
+
+### **Option 1: Use Android Studio (Can be problematic)**
+1. **Start Android Studio → Tools → AVD Manager → Click ▶️ on emulator**
+2. **Wait 3 minutes** until you see Android home screen
+
+### **Option 2: Use Command Line (More reliable)**
+```cmd
+# Start emulator directly
+"%LOCALAPPDATA%\Android\Sdk\emulator\emulator" -avd Medium_Phone_API_36.0 -gpu swiftshader_indirect -memory 1024
+
+# Or use the batch file
+device-manager.bat
+# Choose option 3, then enter emulator name
+```
+
+### **Option 3: Use Real Android Device (Fastest & Most Reliable)**
+1. Enable Developer Options on your Android phone
+2. Enable USB Debugging
+3. Connect phone via USB
+4. Much faster than emulator!
+
+### **Once Device is Ready:**
+3. **Open Command Prompt:**
+   ```cmd
+   cd "C:\Users\LaxminarayanaBoga\mygit\personal\mobile-test-automation"
+   appium
+   ```
+4. **Open ANOTHER Command Prompt:**
+   ```cmd
+   cd "C:\Users\LaxminarayanaBoga\mygit\personal\mobile-test-automation" 
+   mvn test
+   ```
+
+That's it! 🎉
+
+## 🆘 Quick Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| `appium` command not found | Add npm to PATH (see Step 2 above) |
+| Emulator crashes/won't start | Use `device-manager.bat` option 3, or try real device |
+| No devices found | Start emulator first, wait longer, or check `adb devices` |
+| Tests fail | Make sure Appium server is running |
+| Emulator too slow | Use real Android device instead |
+
+## 📊 Test Reports
+Check `reports/` folder for HTML reports with screenshots.
 
 ## What's Working Right Now ✅
 

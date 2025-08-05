@@ -5,7 +5,7 @@ echo ================================
 echo.
 
 echo Checking Java installation...
-java -version
+java -version >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo ERROR: Java not found! Please install Java JDK 11+
     pause
@@ -15,7 +15,7 @@ echo ✓ Java found
 echo.
 
 echo Checking Maven installation...
-mvn -version
+mvn --version >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo ERROR: Maven not found! Please install Apache Maven
     pause
@@ -25,7 +25,7 @@ echo ✓ Maven found
 echo.
 
 echo Checking Android SDK...
-adb version
+adb version >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo ERROR: Android SDK not found! Please install Android Studio and set ANDROID_HOME
     pause
@@ -35,7 +35,7 @@ echo ✓ Android SDK found
 echo.
 
 echo Checking Node.js...
-node -v
+node -v >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo ERROR: Node.js not found! Please install Node.js 14+
     pause
@@ -45,13 +45,19 @@ echo ✓ Node.js found
 echo.
 
 echo Checking Appium...
-appium -v
+appium -v >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
-    echo ERROR: Appium not found! Please install: npm install -g appium
-    pause
-    exit /b 1
+    echo WARNING: Appium not found! Installing Appium globally...
+    npm install -g appium
+    if %ERRORLEVEL% NEQ 0 (
+        echo ERROR: Failed to install Appium! Please run: npm install -g appium
+        pause
+        exit /b 1
+    )
+    echo ✓ Appium installed successfully
+) else (
+    echo ✓ Appium found
 )
-echo ✓ Appium found
 echo.
 
 echo Running Appium Doctor for Android...

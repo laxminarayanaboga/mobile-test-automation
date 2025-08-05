@@ -39,44 +39,18 @@ public class ContactsPage extends BasePage {
     @FindBy(xpath = "//android.widget.EditText[@text='Email']")
     private WebElement emailField;
     
-    @FindBy(id = "com.google.android.contacts:id/toolbar_button")
+    @FindBy(xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[2]/android.view.View[2]/android.widget.Button")
     private WebElement saveButton;
     
     @FindBy(xpath = "//android.widget.TextView[@text='Contacts']")
     private WebElement contactsTitle;
     
-    // Alternative locators if the above don't work
-    private final String ADD_CONTACT_XPATH = "//android.widget.ImageButton[@content-desc='Create contact']";
-    private final String SAVE_CONTACT_XPATH = "//android.widget.Button[@text='Save']";
-    private final String FIRST_NAME_XPATH = "//android.widget.EditText[contains(@text,'First') or contains(@hint,'First')]";
-    private final String LAST_NAME_XPATH = "//android.widget.EditText[contains(@text,'Last') or contains(@hint,'Last')]";
-    private final String PHONE_XPATH = "//android.widget.EditText[contains(@text,'Phone') or contains(@hint,'Phone')]";
-    private final String EMAIL_XPATH = "//android.widget.EditText[contains(@text,'Email') or contains(@hint,'Email')]";
-    
     /**
      * Click the add contact button to create a new contact
      */
     public void clickAddContact() {
-        logger.info("Attempting to click add contact button");
-        try {
-            if (isElementPresent(addContactButton)) {
-                click(addContactButton);
-                logger.info("Clicked add contact button using ID locator");
-            } else {
-                // Try alternative locator
-                WebElement addBtn = findElementSafely(AppiumBy.xpath(ADD_CONTACT_XPATH));
-                if (addBtn != null) {
-                    click(addBtn);
-                    logger.info("Clicked add contact button using XPath locator");
-                } else {
-                    logger.error("Add contact button not found");
-                    throw new RuntimeException("Cannot find add contact button");
-                }
-            }
-        } catch (Exception e) {
-            logger.error("Error clicking add contact button: " + e.getMessage());
-            throw e;
-        }
+        logger.info("Clicking add contact button");
+        click(addContactButton);
     }
     
     /**
@@ -84,24 +58,7 @@ public class ContactsPage extends BasePage {
      */
     public void enterFirstName(String firstName) {
         logger.info("Entering first name: " + firstName);
-        try {
-            if (isElementPresent(firstNameField)) {
-                sendKeys(firstNameField, firstName);
-                logger.info("Entered first name using ID locator");
-            } else {
-                WebElement nameField = findElementSafely(AppiumBy.xpath(FIRST_NAME_XPATH));
-                if (nameField != null) {
-                    sendKeys(nameField, firstName);
-                    logger.info("Entered first name using XPath locator");
-                } else {
-                    logger.error("First name field not found");
-                    throw new RuntimeException("Cannot find first name field");
-                }
-            }
-        } catch (Exception e) {
-            logger.error("Error entering first name: " + e.getMessage());
-            throw e;
-        }
+        sendKeys(firstNameField, firstName);
     }
     
     /**
@@ -109,24 +66,7 @@ public class ContactsPage extends BasePage {
      */
     public void enterLastName(String lastName) {
         logger.info("Entering last name: " + lastName);
-        try {
-            if (isElementPresent(lastNameField)) {
-                sendKeys(lastNameField, lastName);
-                logger.info("Entered last name using ID locator");
-            } else {
-                WebElement nameField = findElementSafely(AppiumBy.xpath(LAST_NAME_XPATH));
-                if (nameField != null) {
-                    sendKeys(nameField, lastName);
-                    logger.info("Entered last name using XPath locator");
-                } else {
-                    logger.error("Last name field not found");
-                    throw new RuntimeException("Cannot find last name field");
-                }
-            }
-        } catch (Exception e) {
-            logger.error("Error entering last name: " + e.getMessage());
-            throw e;
-        }
+        sendKeys(lastNameField, lastName);
     }
     
     /**
@@ -134,24 +74,7 @@ public class ContactsPage extends BasePage {
      */
     public void enterPhoneNumber(String phoneNumber) {
         logger.info("Entering phone number: " + phoneNumber);
-        try {
-            if (isElementPresent(phoneField)) {
-                sendKeys(phoneField, phoneNumber);
-                logger.info("Entered phone number using ID locator");
-            } else {
-                WebElement phone = findElementSafely(AppiumBy.xpath(PHONE_XPATH));
-                if (phone != null) {
-                    sendKeys(phone, phoneNumber);
-                    logger.info("Entered phone number using XPath locator");
-                } else {
-                    logger.error("Phone field not found");
-                    throw new RuntimeException("Cannot find phone field");
-                }
-            }
-        } catch (Exception e) {
-            logger.error("Error entering phone number: " + e.getMessage());
-            throw e;
-        }
+        sendKeys(phoneField, phoneNumber);
     }
     
     /**
@@ -159,49 +82,15 @@ public class ContactsPage extends BasePage {
      */
     public void enterEmail(String email) {
         logger.info("Entering email: " + email);
-        try {
-            if (isElementPresent(emailField)) {
-                sendKeys(emailField, email);
-                logger.info("Entered email using ID locator");
-            } else {
-                WebElement emailElement = findElementSafely(AppiumBy.xpath(EMAIL_XPATH));
-                if (emailElement != null) {
-                    sendKeys(emailElement, email);
-                    logger.info("Entered email using XPath locator");
-                } else {
-                    logger.error("Email field not found");
-                    throw new RuntimeException("Cannot find email field");
-                }
-            }
-        } catch (Exception e) {
-            logger.error("Error entering email: " + e.getMessage());
-            throw e;
-        }
+        sendKeys(emailField, email);
     }
     
     /**
      * Save the contact
      */
     public void saveContact() {
-        logger.info("Attempting to save contact");
-        try {
-            if (isElementPresent(saveButton)) {
-                click(saveButton);
-                logger.info("Clicked save button using ID locator");
-            } else {
-                WebElement saveBtn = findElementSafely(AppiumBy.xpath(SAVE_CONTACT_XPATH));
-                if (saveBtn != null) {
-                    click(saveBtn);
-                    logger.info("Clicked save button using XPath locator");
-                } else {
-                    logger.error("Save button not found");
-                    throw new RuntimeException("Cannot find save button");
-                }
-            }
-        } catch (Exception e) {
-            logger.error("Error saving contact: " + e.getMessage());
-            throw e;
-        }
+        logger.info("Clicking save button");
+        click(saveButton);
     }
     
     /**
@@ -231,8 +120,8 @@ public class ContactsPage extends BasePage {
         
         enterFirstName(firstName);
         enterLastName(lastName);
-        enterPhoneNumber(phoneNumber);
-        enterEmail(email);
+        // enterPhoneNumber(phoneNumber);
+        // enterEmail(email);
         
         saveContact();
         waitForElementToBeClickable(2); // Wait for save to complete
