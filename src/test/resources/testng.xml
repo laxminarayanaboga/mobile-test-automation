@@ -10,35 +10,27 @@
         <!-- Add custom listeners here if needed -->
     </listeners>
     
-    <!-- Calculator Tests -->
-    <test name="Calculator Functionality Tests" preserve-order="true">
+    <!-- All Mobile Tests -->
+    <test name="Mobile Test Suite" preserve-order="true">
         <classes>
-            <class name="com.automation.tests.CalculatorTest">
+            <class name="com.automation.tests.DeviceConnectivityTest">
                 <methods>
-                    <include name="testCalculatorAppLaunch"/>
-                    <include name="testAddition"/>
-                    <include name="testSubtraction"/>
-                    <include name="testMultiplication"/>
-                    <include name="testDivision"/>
-                    <include name="testComplexCalculation"/>
-                    <include name="testClearFunctionality"/>
+                    <include name="testDeviceConnectivity"/>
                 </methods>
             </class>
-        </classes>
-    </test>
-    
-    <!-- Smoke Tests -->
-    <test name="Smoke Tests" preserve-order="true">
-        <groups>
-            <run>
-                <include name="smoke"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="com.automation.tests.CalculatorTest">
+            <class name="com.automation.tests.ContactsExplorationTest">
                 <methods>
-                    <include name="testCalculatorAppLaunch"/>
-                    <include name="testAddition"/>
+                    <include name="testContactsAppExploration"/>
+                </methods>
+            </class>
+            <class name="com.automation.tests.CreateContactTest">
+                <methods>
+                    <include name="testCreateContactFlow"/>
+                </methods>
+            </class>
+            <class name="com.automation.tests.CompleteContactTest">
+                <methods>
+                    <include name="testCompleteContactManagement"/>
                 </methods>
             </class>
         </classes>

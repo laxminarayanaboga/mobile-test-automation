@@ -10,7 +10,7 @@ echo 1. List connected devices
 echo 2. List available emulators
 echo 3. Start an emulator
 echo 4. Check device info
-echo 5. Install Calculator APK (if needed)
+echo 5. Check installed apps
 echo 6. Exit
 echo.
 set /p choice="Enter your choice (1-6): "
@@ -19,7 +19,7 @@ if "%choice%"=="1" goto list_devices
 if "%choice%"=="2" goto list_emulators
 if "%choice%"=="3" goto start_emulator
 if "%choice%"=="4" goto device_info
-if "%choice%"=="5" goto install_apk
+if "%choice%"=="5" goto check_apps
 if "%choice%"=="6" goto exit
 goto menu
 
@@ -62,12 +62,14 @@ adb shell getprop ro.product.manufacturer
 echo.
 goto menu
 
-:install_apk
+:check_apps
 echo.
-echo Note: Calculator app is usually pre-installed on Android devices
-echo If you have a specific Calculator APK, place it in the project root and update this script
+echo Checking for Google Contacts app:
+adb shell pm list packages | findstr contacts
 echo.
-REM adb install calculator.apk
+echo Checking for system contacts app:
+adb shell pm list packages | findstr com.android.contacts
+echo.
 goto menu
 
 :exit

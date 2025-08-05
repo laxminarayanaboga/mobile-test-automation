@@ -257,7 +257,7 @@ Perfect foundation for mobile testing projects! 🎉
 ## Next Steps 💡
 
 1. **Fix Contact Save**: Handle the save dialog properly in contact creation
-2. **Add More Apps**: Extend to test other Android apps (Settings, Calculator, etc.)
+2. **Add More Apps**: Extend to test other Android apps (Settings, Dialer, etc.)
 3. **Real Device Testing**: Connect and test with physical Android devices
 4. **CI/CD Integration**: Set up automated test execution
 5. **Cross-Platform**: Extend framework to support iOS testing
